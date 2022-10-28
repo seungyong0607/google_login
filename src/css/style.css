@@ -1,0 +1,446 @@
+/* button {
+  padding: 10px;
+  background-color: #3C79F8;
+  display: inline-block;
+} */
+
+* {
+  font-family: 'Pretendard';
+}
+
+.app { 
+  width: 360px;
+  height: 600px;
+ 
+  position: relative;
+}
+
+.welcome p, .loginDesc p {
+  padding: 0px;
+  margin: 0px;
+}
+
+.welcome {
+  width: 150px;
+  height: 142px;
+
+  position: absolute;
+  top: 184px;
+  left: 30px;
+
+  font-size: 30px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: -1.05px;
+  text-align: left;
+  color: #000;
+  
+	font-weight: 800;
+	font-display: swap;
+}
+
+.loginDesc {
+  position: absolute;
+  top: 320px;
+  left: 30px;
+
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.42px;
+  text-align: left;
+  color: #000;
+}
+
+.loginButton {
+  position: absolute;
+  top: 354px;
+  left: 29px;
+
+  cursor: pointer;
+}
+
+/* my page start */
+
+.myPage {
+  color: #ffffff;
+
+  position: absolute;
+  top: 208px;
+  left: 30px;
+
+  width: 300px;
+  height: 196px;
+
+  padding: 10px 26px 10px 26px;
+
+  border-radius: 10px;
+  background-color: #3283fc;
+}
+
+.myPageHeader {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.myPageHeader .arrow  {
+  margin-left: -7px;
+}
+
+.profile_circle {
+  border-radius: 10px;
+  width: 6px;
+  height: 6px;
+
+  display: inline-block;
+  background-color: yellow;
+}
+
+.profile_name {
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.32px;
+  text-align: left;
+  color: #fff;
+}
+
+.myPageContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.myPageContent .desc {
+  font-size: 14px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #fff;
+
+  margin: 0px;
+  padding: 0px;
+  
+  margin-bottom: 5px;
+}
+
+.myPageContent .name {
+  font-size: 16px;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #fff;
+}
+
+.myPageContent .balance {
+  font-size: 33px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #fff;
+}
+
+.myPageContent .mcnt {
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #fff;
+}
+
+
+.myPageContent .dollar {
+  margin-top: 4px;
+
+  font-size: 14px;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #fff;
+}
+
+
+.myPage .buttonArea {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.myPage .buttonArea .myBtn {
+  width: 102px;
+  height: 36px;
+
+  padding-top: 3px;
+  padding-bottom: 3px;
+
+  border-radius: 6px;
+  box-shadow: 3px 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #fff;
+ 
+  border: none;
+
+  font-size: 14px;
+  font-weight: bold;
+  color: #000;
+  font-family: 'Pretendard';
+}
+
+
+/* my page end */
+
+
+
+/* transferPage start */
+
+.transferPage, .historyPage {
+  color: #ffffff;
+
+  position: absolute;
+  top: 170px;
+  left: 30px;
+
+  width: 300px;
+  height: 260px;
+
+  border-radius: 10px;
+  background-color: #3283fc;
+}
+
+.transferHeader, .historyHeader {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border-bottom: 1px solid #ffffff;
+
+  padding: 0px 12px 4px 12px;
+}
+
+.transferHeader .title, .historyHeader .title {
+  font-size: 14px;
+
+  font-weight: bold;
+}
+
+.ui-selectmenu-menu-item-header {display:block; font-weight:bold;}
+.ui-selectmenu-menu-item-content {display:block;}
+
+.transferPage .transferContent { 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 3px;
+}
+
+.transfer_wrap {
+  margin-top: 6px;
+  width: 276px; 
+  height: 45px;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  padding: 5px;
+}
+
+.transfer_wrap .text {
+  width: 80px;
+  height: 45px;
+  margin-right: 8px;
+
+  font-size:13px;
+  
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+
+.transfer_wrap .token_number {
+  width: 180px !important;
+  height: 45px;
+  
+  border-radius: 6px;
+  border: none;
+  padding: 10px;
+  font-size: 12px;
+}
+
+.ui-state-hover {
+  border: none !important;
+  background: none !important;
+  color: #fff;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.46px;
+  text-align: left;
+}
+
+.ui-selectmenu-text , .ui-state-default{
+  width: 180px !important;
+  height: 45px;
+
+  border: none !important;
+  background: #fff !important;
+  color: #000;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.46px;
+  text-align: left;
+}
+
+.ui-selectmenu-text {
+  background: #fff;
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.46px;
+  text-align: left;
+  color: #000;
+}
+
+.ui-selectmenu-text .ui-selectmenu-menu-item-content {
+  font-size: 9px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #a29696;
+}
+
+.ui-state-focus .ui-selectmenu-menu-item-header {
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.46px;
+}
+
+.ui-state-focus .ui-selectmenu-menu-item-content {
+  font-size: 9px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.46px;
+}
+
+.ui-menu-item .ui-selectmenu-menu-item-header, .ui-state-focus .ui-selectmenu-menu-item-header {
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.46px;
+}
+
+.ui-menu-item .ui-selectmenu-menu-item-content, .ui-state-focus .ui-selectmenu-menu-item-content {
+  font-size: 9px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.46px;
+}
+
+
+/* transferPage end */
+
+/* 
+#login_button {
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.loginArea { 
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.loginTitle {
+
+}
+
+.loginArea .copylight {
+  color: grey;
+}
+
+.mypageHaeder {
+  width:300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mypageBody {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  
+  height: 250px;
+}
+
+.mypageBody .coin {
+  font-size: 20px;
+} 
+
+.mypageBody .money {
+  font-size: 32px;
+  font-weight: bold;
+} 
+
+.mypageBody .pay {
+  font-size: 12px;
+  font-weight: 100;
+  margin-top:10px;
+} 
+
+.mypageFooter {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 50px;
+}
+
+.mypageFooter button {
+  width:120px;
+  color: white;
+} */

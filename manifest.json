@@ -1,0 +1,24 @@
+{
+  "name": "OAuth",
+  "permissions": [
+    "identity"
+  ],
+  "version": "1.0",
+  "description": "extension google login.",
+  "manifest_version": 3,
+  "action": {
+    "default_title": "extension google login.",
+    "default_popup": "login.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAos5NvP41jxaYcmgefE9Jm6nBIoOz/yL7fvE55XCumWpnXRfZyF6M/Sgz5kNVC0Zl9wZg8k1GpNz8k1pwehj1V6JrZIz4h/jsBqcg3/nGz2gQO3lQl0GBjjkgFNnvEbn83ilk+3x/VechdAu7KwZSu92+gwpeLmCmMDfwviSEpy6M0afsELX3zc3N113WmmXRjIavhSN4eCriAwHfaO+i/rLYVpPDc0wWBySRj6RHL4UIUqtRuLQ/ePy9rQaK/n5xDUN5JBLEYCGGCJjYv/C6/ENH0Hb7Kq16jNJ7cJ0hg7hUzFTYhqrbK6zkvtv6T2KnH2EEK/jU6MChWszWkUp9VwIDAQAB",
+  "oauth2": {
+    "client_id": "220893301535-3mu7c2jaovce112usfla6l7a86t8aiht.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile"
+    ]
+  }
+}
