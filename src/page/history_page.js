@@ -13,18 +13,21 @@ function HistoryPage({ $app, initialState, moveMypage }) {
 
   this.render = () => {
     this.$target = document.createElement('div');
-    this.$target.className = 'historyPage';
+    this.$target.classList = 'historyPage subPage';
 
     let historyHeader = document.createElement('div');
-    historyHeader.className = 'historyHeader';
+    historyHeader.classList = 'historyHeader subPageHeader';
     historyHeader.innerHTML = `
         <span class="title">거래 기록</span> 
     `;
+
+    const userName = this.state.userInfo.Firstname.String+this.state.userInfo.Lastname.String;
+
     new BackButton({ $target: historyHeader, onClick: () => { moveMypage() } });
-    new Profile({ $target: historyHeader, name: '고승용'});
+    new Profile({ $target: historyHeader, name: userName});
 
     let contentArea = document.createElement('div');
-    contentArea.className = 'transferContent';
+    contentArea.classList = 'transferContent subPageContent';
 
     new SelectItem({ $target: contentArea, label: '보내기', list: [{name: '고승용 1,278 MCNT', subName: "test@tset.com $1.3USD" }, {name: '고승용 1,278 MCNT', subName: "test@tset.com" }] });
     new SelectItem({ $target: contentArea, label: '받기', list: [{name: '고승용', subName: "test@tset.com" }] });

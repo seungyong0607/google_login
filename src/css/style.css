@@ -91,6 +91,7 @@
 
 .myPageHeader .arrow  {
   margin-left: -7px;
+  cursor: pointer;
 }
 
 .profile_circle {
@@ -227,7 +228,7 @@
   background-color: #3283fc;
 }
 
-.transferHeader, .historyHeader {
+.subPageHeader {
   margin-top: 10px;
   display: flex;
   justify-content: space-between;
@@ -238,7 +239,7 @@
   padding: 0px 12px 4px 12px;
 }
 
-.transferHeader .title, .historyHeader .title {
+.subPageHeader .title {
   font-size: 14px;
 
   font-weight: bold;
@@ -247,7 +248,8 @@
 .ui-selectmenu-menu-item-header {display:block; font-weight:bold;}
 .ui-selectmenu-menu-item-content {display:block;}
 
-.transferPage .transferContent { 
+/* .transferPage .transferContent {  */
+.subPage .subPageContent { 
   display: flex;
   flex-direction: column;
   justify-content: center;

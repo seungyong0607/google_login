@@ -12,30 +12,38 @@ function App($app) {
     nodes: [],
     pageName: 'login',
     userInfo: null,
+    amount: 0,
   }
 
   async function useRefreshToken() {
     const token = getItem('refreshToken');
+    console.log('re', token);
 
-    if(token != '') {
-      let res = await fetch('http://www.litriggy.com:7777/api/v1/auth/renew', {
-        method: "GET",
-        headers: {
-          authorization: token,
-        },
-        'contentType': 'json'
-      })
-
-      console.log("resres", res);
-
-      let data = await res.json();
-      console.log("useRefreshTokenuseRefreshToken : ", data); // 419
+    try {
+      if(token != '') {
+        let res = await fetch('http://www.litriggy.com:7777/api/v1/auth/renew', {
+          method: "GET",
+          headers: {
+            authorization: token,
+          },
+          'contentType': 'json'
+        })
+        
+        let data = await res.json();
+        console.log("useRefreshTokenuseRefreshToken : ", data); // 419
+        return data.Access;
+      }
+    } catch(e) {
+      loginPage.render();
     }
-    
-    return data;
   }
 
   async function useAssessToken(token) {
+    let obj = {
+      token,
+      data: null,
+    }
+
     try {
       let res = await fetch('http://www.litriggy.com:7777/api/v1/auth/check/google', {
         method: "GET",
@@ -45,66 +53,88 @@ function App($app) {
         'contentType': 'json'
       })
       
-      let data = await res.json();
+      let { data } = await res.json();
+      obj.data = data;
       
       if(res.status == 419) {
-        // 401에러
-        await useRefreshToken();
+        // 419 에러
+        let authorization = await useRefreshToken();
+        obj.token = authorization;
+
+        let res = await fetch('http://www.litriggy.com:7777/api/v1/auth/check/google', {
+          method: "GET",
+          headers: {
+            authorization,
+          },
+          'contentType': 'json'
+        })
+      
+        let data = await res.json();
+        // console.log("data data data", data);
+        obj = {
+          ...obj,
+          data: data.data,
+        }
       }
 
-      console.log("data data : ", data.data[0]); // 419
-      return data.data[0];
-      
+      // console.log("objjjjj", obj);
+
+      return obj;
     } catch(e) {
       console.log('error');
       console.log(e);
     }
   }
 
-  async function init() {
-    removeItem('accessToken');
-    removeItem('refreshToken');
-    let token = getItem('accessToken');
+  async function getAmount (accessToken) {
+    const balRes = await fetch("http://www.litriggy.com:7777/api/v1/user/balance/mcnt", {
+      method: "GET",
+      headers: {
+        authorization: accessToken,
+        "Content-Type": "application/json",
+      },
+    });
 
-    // if(token == '') {
-    //   token = getItem('refeshToken');
-    // }
-    // console.log(self.state.userInfo);
+    const balance = await balRes.json();
+    self.state = {
+      ...self.state,
+      amount: balance.amount,
+    }
+  }
+
+  async function init() {
+    // removeItem('accessToken');
+    // removeItem('refreshToken');
+    const token = getItem('accessToken');
+    console.log("accessToken", token);
+
     if(self.state.userInfo == null && token == undefined) {
       loginPage.render();
     } else {
-      self.state.userInfo = await useAssessToken(token);
-      console.log("self.state.userInfo ,", self.state.userInfo);
+      let data = await useAssessToken(token);
+      // console.log(data);
+      self.state.userInfo = data.data;
+      // console.log('tokentoken', token);
+      self.state.amount = await getAmount(data.token);
       myPage.setState(self.state);
     }
   }
 
   function onClose() {
+    removeItem('accessToken');
+    removeItem('refreshToken');
+
     window.close();
   }
 
   async function login() {
     const { token } = await chrome.identity.getAuthToken({ interactive: true });
-    console.log('login' , token);
 
     if (token == null) {
       console.log('login fail');
       return;
     }
 
-    // const params = {
-    //   method: 'GET',
-    //   async: true,
-    //   headers: {
-    //     Authorization: 'Bearer ' + token,
-    //     'Content-Type': 'application/json'
-    //   },
-    //   'contentType': 'json'
-    // };
-
-    // let res = await fetch('https://www.googleapis.com/oauth2/v1/userinfo?', params);
-    // const userInfo = await res.json();
-    
     try {
       const res = await fetch("http://www.litriggy.com:7777/api/v1/auth/signin", {
         method: "POST",
@@ -118,10 +148,16 @@ function App($app) {
       });
 
       const data = await res.json();
+      removeItem('accessToken');
+      removeItem('refreshToken');
+
       setItem('accessToken', data['access-token']);
       setItem('refreshToken', data['refresh-token']);
 
+      // console.log(data);
       self.state.userInfo = data['message'];
+      await getAmount(data['access-token']);
+     
       myPage.setState(self.state);
       
     }catch(e) {
@@ -142,7 +178,7 @@ function App($app) {
 
   const transferPage = new TransferPage({
     $app,
-    initialState: {},
+    initialState: this.state,
     moveMypage,
   });
 
@@ -167,9 +203,6 @@ function App($app) {
   });
 
   init();
-  // const { pathname } = location;
-  // if (pathname === '/login.html') {
-  // } 
 }
 
 export default App;

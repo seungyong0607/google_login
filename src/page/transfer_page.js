@@ -13,18 +13,21 @@ function TransferPage({ $app, initialState, moveMypage }) {
 
   this.render = () => {
     this.$target = document.createElement('div');
-    this.$target.className = 'transferPage';
+    this.$target.classList = 'transferPage subPage';
 
     let transferHeader = document.createElement('div');
-    transferHeader.className = 'transferHeader';
+    transferHeader.classList = 'transferHeader subPageHeader';
     transferHeader.innerHTML = `
         <span class="title">토큰 전송</span> 
     `;
+
+    const userName = this.state.userInfo.Firstname.String+this.state.userInfo.Lastname.String;
+
     new BackButton({ $target: transferHeader, onClick: () => { moveMypage() } });
-    new Profile({ $target: transferHeader, name: '고승용'});
+    new Profile({ $target: transferHeader, name: userName });
 
     let contentArea = document.createElement('div');
-    contentArea.className = 'transferContent';
+    contentArea.classList = 'transferContent subPageContent';
 
     new SelectItem({ $target: contentArea, label: '보내는 사람', list: [{name: '고승용', subName: "test@tset.com" }, {name: '고승용', subName: "test@tset.com" }] });
     new SelectItem({ $target: contentArea, label: '받는 사람', list: [{name: '고승용', subName: "test@tset.com" }] });

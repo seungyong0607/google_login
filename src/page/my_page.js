@@ -1,9 +1,13 @@
+import BackButton from "../components/BackButton.js";
+import Profile from "../components/ProfileComponent.js";
+
 function MyPage({ $app, initialState, onClose, transferClick, historyClick, moveMypage }) {
   this.state = initialState;
 
   this.setState = nextState => {
     this.state = nextState;
-    $app.innerHTML = "<div></div>";
+    $app.innerHTML = "";
+    console.log('setState 실행', this.state, $app);
     this.render();
   }
 
@@ -11,32 +15,27 @@ function MyPage({ $app, initialState, onClose, transferClick, historyClick, move
     this.$target = document.createElement('div');
     this.$target.className = 'myPage';
 
-    let myPageHeader = `
-      <div class="myPageHeader">
-        <span class="arrow"> 
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
-          </svg>
-        </span>
-        <div>
-          <span class="profile_circle"></span>
-          <span class="profile_name">name</span>
-        </div>
-      </div>
-    `;
+    const userName = this.state.userInfo.Firstname.String+this.state.userInfo.Lastname.String;
+    const $myPageHeader = document.createElement('div');
+    $myPageHeader.className = 'myPageHeader';
+    new BackButton({ $target: $myPageHeader, onClick: () => { onClose(); } });
+    new Profile({ $target: $myPageHeader, name: userName });
 
-    let myPageContent = `
-      <div class="myPageContent">
+    const $myPageContent = document.createElement('div');
+    $myPageContent.classList = 'myPageContent';
+
+    let amount = this.state.amount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+
+    $myPageContent.innerHTML = `
         <p class="desc">Total Balance</p>
         <div>
-          <span class="balance">8,478</span>
+          <span class="balance">${amount}</span>
           <span class="mcnt">MCNT</span>
         </div>
         <p class="dollar">
           $1.30 USD
         </p>
-      </div>
-    `;
+      `;
 
     let buttonArea = document.createElement('div');
     buttonArea.className = 'buttonArea';
@@ -49,23 +48,23 @@ function MyPage({ $app, initialState, onClose, transferClick, historyClick, move
     historyButton.innerHTML = `거래 기록`;
     historyButton.addEventListener('click', e => historyClick(moveMypage));
 
-    this.$target.innerHTML = `
-      ${myPageHeader}
-      ${myPageContent}
-    `;
-    
+    this.$target.appendChild($myPageHeader);
+    this.$target.appendChild($myPageContent);
+
+    console.log('타겟 확인:', this.$target);
+
     buttonArea.appendChild(transferButton);
     buttonArea.appendChild(historyButton);
     this.$target.appendChild(buttonArea);
 
+    console.log("확인", $app);
     $app.appendChild(this.$target);
   }
 
-  // document.querySelector('.btn-close').addEventListener('click', e=> {
-  //   console.log('ee');
-  //   window.close();
-  // })
-  // this.render();
+  console.log("this.state.userInfo", this.state.userInfo);
+  if(this.state.userInfo !== undefined) {
+    this.render();
+  }
 }
 
 export default MyPage;
@@ -114,3 +113,25 @@ export default MyPage;
 // </div>
 // </div>
 // `;
+
+
+    // let myPageHeader = `
+    //   <div class="myPageHeader">
+    //     <span class="arrow"> 
+    //       <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+    //         <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+    //       </svg>
+    //     </span>
+    //     <div>
+    //       <span class="profile_circle"></span>
+    //       <span class="profile_name">${this.state.userInfo.Firstname.String}${this.state.userInfo.Lastname.String}</span>
+    //     </div>
+    //   </div>
+    // `;
+
+
+    
+    // this.$target.innerHTML = `
+    //   ${myPageHeader}
+    //   ${$myPageContent}
+    // `;
