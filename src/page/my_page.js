@@ -24,16 +24,15 @@ function MyPage({ $app, initialState, onClose, transferClick, historyClick, move
     const $myPageContent = document.createElement('div');
     $myPageContent.classList = 'myPageContent';
 
-    let amount = this.state.amount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-
+    let { amount, USD } = this.state.balance;
     $myPageContent.innerHTML = `
         <p class="desc">Total Balance</p>
         <div>
-          <span class="balance">${amount}</span>
+          <span class="balance">${amount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</span>
           <span class="mcnt">MCNT</span>
         </div>
         <p class="dollar">
-          $1.30 USD
+        $ ${USD} 
         </p>
       `;
 

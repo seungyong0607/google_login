@@ -12,7 +12,7 @@ function App($app) {
     nodes: [],
     pageName: 'login',
     userInfo: null,
-    amount: 0,
+    balance: {},
   }
 
   async function useRefreshToken() {
@@ -30,7 +30,7 @@ function App($app) {
         })
         
         let data = await res.json();
-        console.log("useRefreshTokenuseRefreshToken : ", data); // 419
+        // console.log("useRefreshTokenuseRefreshToken : ", data); // 419
         return data.Access;
       }
     } catch(e) {
@@ -86,7 +86,7 @@ function App($app) {
     }
   }
 
-  async function getAmount (accessToken) {
+  async function getBalance(accessToken) {
     const balRes = await fetch("http://www.litriggy.com:7777/api/v1/user/balance/mcnt", {
       method: "GET",
       headers: {
@@ -96,9 +96,10 @@ function App($app) {
     });
 
     const balance = await balRes.json();
+    console.log("balance :", balance);
     self.state = {
       ...self.state,
-      amount: balance.amount,
+      balance,
     }
   }
 
@@ -111,11 +112,10 @@ function App($app) {
     if(self.state.userInfo == null && token == undefined) {
       loginPage.render();
     } else {
-      let data = await useAssessToken(token);
-      // console.log(data);
+      let data  = await useAssessToken(token);
       self.state.userInfo = data.data;
-      // console.log('tokentoken', token);
-      self.state.amount = await getAmount(data.token);
+      console.log("data.toke", data.token);
+      await getBalance(data.token);
       myPage.setState(self.state);
     }
   }
@@ -156,7 +156,7 @@ function App($app) {
 
       // console.log(data);
       self.state.userInfo = data['message'];
-      await getAmount(data['access-token']);
+      await getBalance(data['access-token']);
      
       myPage.setState(self.state);
       
