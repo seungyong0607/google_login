@@ -48,12 +48,3 @@ function LoginPage({ $app, initialState, onClick, }) {
 }
 
 export default LoginPage;
-
-
-{/* <div style='text-align: center'>
-<h3 class="loginTitle">Sign In with</h3>
-<img src="/public/btn_google_signin_dark_normal_web.png" id="login_button" />
-</div>
-<div style="padding-top:40px">
-<h6 class="copylight" >test sample login</h6>
-</div> */}

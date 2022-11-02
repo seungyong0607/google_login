@@ -15,7 +15,8 @@ function MyPage({ $app, initialState, onClose, transferClick, historyClick, move
     this.$target = document.createElement('div');
     this.$target.className = 'myPage';
 
-    const userName = this.state.userInfo.Firstname.String+this.state.userInfo.Lastname.String;
+    const userName = this.state.userInfo.Lastname.String+this.state.userInfo.Firstname.String;
+
     const $myPageHeader = document.createElement('div');
     $myPageHeader.className = 'myPageHeader';
     new BackButton({ $target: $myPageHeader, onClick: () => { onClose(); } });

@@ -20,8 +20,8 @@ function HistoryPage({ $app, initialState, moveMypage }) {
     historyHeader.innerHTML = `
         <span class="title">거래 기록</span> 
     `;
-
-    const userName = this.state.userInfo.Firstname.String+this.state.userInfo.Lastname.String;
+    
+    const userName = this.state.userInfo.Lastname.String+this.state.userInfo.Firstname.String;
 
     new BackButton({ $target: historyHeader, onClick: () => { moveMypage() } });
     new Profile({ $target: historyHeader, name: userName});

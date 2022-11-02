@@ -70,14 +70,14 @@ function App($app) {
         })
       
         let data = await res.json();
-        // console.log("data data data", data);
         obj = {
           ...obj,
           data: data.data,
         }
-      }
 
-      // console.log("objjjjj", obj);
+        removeItem('accessToken');
+        setItem('accessToken', obj.token);
+      }
 
       return obj;
     } catch(e) {
@@ -96,12 +96,23 @@ function App($app) {
     });
 
     const balance = await balRes.json();
-    console.log("balance :", balance);
     self.state = {
       ...self.state,
       balance,
     }
   }
+
+  async function focusOut(e){
+    const res = await fetch(`http://www.litriggy.com:7777/api/v1/user/name/${e.target.value}`);
+    const data = await res.json();
+    // console.log("email check value :", data);
+    
+    if(data.status === 200) {
+      return true;
+    }
+
+    return false;
+  } 
 
   async function init() {
     // removeItem('accessToken');
@@ -180,6 +191,7 @@ function App($app) {
     $app,
     initialState: this.state,
     moveMypage,
+    focusOut,
   });
 
   const historyPage = new HistoryPage({
